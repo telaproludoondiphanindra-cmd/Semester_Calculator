@@ -1,0 +1,81 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Semester-6 Calculator</title>
+        <style>
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+                text-align: center;
+            }
+            .box{
+                background-color: maroon;
+                padding: 20px;
+                width: 400px;
+                margin: auto;
+                border-radius: 5px;
+                box-shadow: 0 0 10px brown;
+            }
+            .input-bar {
+                width: 100%;         
+                height: 30px;     
+                font-size: 16px;
+                padding: 8px;
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+    <body>
+       <h2>Calculate Your Semester-6 Marks Here...</h2>
+       <div class = "box">
+            <input class = "input-bar" id = "IMED" type = "number" min = "0" max = "100" placeholder = "Enter IMED marks"><br><br>
+            <input class = "input-bar" id = "NLP" type = "number" min = "0" max = "100" placeholder = "Enter NLP marks"><br><br>
+            <input class = "input-bar" id = "QC" type = "number" min = "0" max = "100" placeholder = "Enter QC marks"><br><br>
+            <input class = "input-bar" id = "CP" type = "number" min = "0" max = "100" placeholder = "Enter CP marks"><br><br>
+            <input class = "input-bar" id = "CV&IP" type = "number" min = "0" max = "100" placeholder = "Enter CV&IP marks"><br><br>
+            <input class = "input-bar" id = "SS" type = "number" min = "0" max = "100" placeholder = "Enter SS-LAB marks"><br><br>
+            <input class = "input-bar" id = "NLPL" type = "number" min = "0" max = "100" placeholder = "Enter NLP-LAB marks"><br><br>
+            <input class = "input-bar" id = "CPL" type = "number" min = "0" max = "100" placeholder = "Enter CP-LAB marks"><br><br>
+            <button onclick = "MyCalc()">Submit</button>
+            <h5 id = "output" style = "color: cornsilk"></h5>
+            <p style = "margin-top: 30px; font-size: 16px; color: #fffddf; font-weight: bold;">✨ Created by Phanindra ✨</p>
+       </div>
+       <script>
+        function MyCalc()
+        {
+            
+            let grade,mark,values,total = 0;
+            let marks,total_score,sum = 0;
+            let id = ["IMED","NLP","QC","CP","CV&IP","SS","NLPL","CPL"];
+            let credit = [3,3,3,3,3,2,1.5,1.5];
+
+            for(let i = 0; i < id.length; i++){
+                values = document.getElementById(id[i]).value;
+                if(values === ""){
+                    alert("please fill all the fields!...");
+                    return;
+                }
+                
+                marks = Number(values);
+                if(isNaN(marks) || marks < 0 || marks > 100){
+                    alert("Enter marks between 0 and 100 for all subjects");
+                    return;
+                }
+
+                sum += credit[i];
+                if(marks >= 90) grade = 10;
+                else if(marks >= 80 && marks <= 89) grade = 9;
+                else if(marks >= 70 && marks <= 79) grade = 8;
+                else if(marks >= 60 && marks <= 69) grade = 7;
+                else if(marks >= 50 && marks <= 59) grade = 6;
+                else if(marks >= 40 && marks <= 49) grade = 5;
+                else grade = 0;
+
+                mark = grade * credit[i];
+                total += mark;
+
+            }
+            total_score = total / sum;
+            document.getElementById("output").innerText = "Total SGPA: " + total_score.toFixed(2);
+        }
+       </script>
+    </body>
